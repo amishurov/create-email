@@ -62,18 +62,12 @@ ExpectedCondition<Boolean>() {
    public static void editForm(WebDriver driver, String name, String
 surname, String day, String month, String year)
    {
-       WebElement inputName =
-driver.findElement(By.xpath("//form/div[2]/span[2]/input[1]"));
-       WebElement inputSurname =
-driver.findElement(By.xpath("//form/div[3]/span[2]/input[1]"));
-       WebElement inputDay =
-driver.findElement(By.xpath("//form/div[4]/span[2]/select[1]"));
-       WebElement inputMonth =
-driver.findElement(By.xpath("//form/div[4]/span[2]/select[2]"));
-       WebElement inputYear =
-driver.findElement(By.xpath("//form/div[4]/span[2]/select[3]"));
-       WebElement inputGender =
-driver.findElement(By.xpath("//form/div[6]/span[2]/label[1]"));
+       WebElement inputName = driver.findElement(By.xpath("//form/div[2]/span[2]/input[1]"));
+       WebElement inputSurname = driver.findElement(By.xpath("//form/div[3]/span[2]/input[1]"));
+       WebElement inputDay = driver.findElement(By.xpath("//form/div[4]/span[2]/select[1]"));
+       WebElement inputMonth = driver.findElement(By.xpath("//form/div[4]/span[2]/select[2]"));
+       WebElement inputYear = driver.findElement(By.xpath("//form/div[4]/span[2]/select[3]"));
+       WebElement inputGender = driver.findElement(By.xpath("//form/div[6]/span[2]/label[1]"));
        inputName.sendKeys(name);
        inputSurname.sendKeys(surname);
        inputDay.sendKeys(day);
