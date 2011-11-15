@@ -1,7 +1,7 @@
 package reg;
 
 /**
- * Created by IntelliJ IDEA.
+ * Created by IntellijJ IDEA.
  * User: doc
  * Date: 15.11.11
  * Time: 9:05
@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-public class registration  {
+public class registration {
    public static void main(String[] args) {
        // Create a new instance of the Firefox driver
        // Notice that the remainder of the code relies on the interface,
@@ -54,7 +54,7 @@ ExpectedCondition<Boolean>() {
        });
                 */
        // Should see: "cheese! - Google Search"
-       System.out.println("Page title is: " + driver.getTitle());
+        System .out.println("Page title is: " + driver.getTitle());
 
        //Close the browser
        //driver.quit();
@@ -62,12 +62,20 @@ ExpectedCondition<Boolean>() {
    public static void editForm(WebDriver driver, String name, String
 surname, String day, String month, String year)
    {
-       WebElement inputName = driver.findElement(By.xpath("//form/div[2]/span[2]/input[1]"));
-       WebElement inputSurname = driver.findElement(By.xpath("//form/div[3]/span[2]/input[1]"));
-       WebElement inputDay = driver.findElement(By.xpath("//form/div[4]/span[2]/select[1]"));
-       WebElement inputMonth = driver.findElement(By.xpath("//form/div[4]/span[2]/select[2]"));
-       WebElement inputYear = driver.findElement(By.xpath("//form/div[4]/span[2]/select[3]"));
-       WebElement inputGender = driver.findElement(By.xpath("//form/div[6]/span[2]/label[1]"));
+       By nameXpath = By.xpath("//form/div[2]/span[2]/input[1]");
+       By surnameXpath = By.xpath("//form/div[3]/span[2]/input[1]");
+       By dayXpath = By.xpath("//form/div[4]/span[2]/select[1]");
+       By monthXpath = By.xpath("//form/div[4]/span[2]/select[2]");
+       By yearXpath  = By.xpath("//form/div[4]/span[2]/select[3]");
+       By genderXpath = By.xpath("//form/div[6]/span[2]/label[1]");
+
+       WebElement inputName = driver.findElement(nameXpath);
+       WebElement inputSurname = driver.findElement(surnameXpath);
+       WebElement inputDay = driver.findElement(dayXpath);
+       WebElement inputMonth = driver.findElement(monthXpath);
+       WebElement inputYear = driver.findElement(yearXpath);
+       WebElement inputGender = driver.findElement(genderXpath);
+
        inputName.sendKeys(name);
        inputSurname.sendKeys(surname);
        inputDay.sendKeys(day);
