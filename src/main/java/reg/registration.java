@@ -54,7 +54,7 @@ ExpectedCondition<Boolean>() {
        });
                 */
        // Should see: "cheese! - Google Search"
-        System .out.println("Page title is: " + driver.getTitle());
+        System.out.println("Page title is: " + driver.getTitle());
 
        //Close the browser
        //driver.quit();
