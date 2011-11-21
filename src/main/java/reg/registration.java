@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class registration {
   public static void main(String[] args) {
+    System.out.print(args[0]);
     // Create a new instance of the Firefox driver
     // Notice that the remainder of the code relies on the interface,
     // not the implementation.
@@ -25,7 +26,7 @@ public class registration {
 
     // And now use this to visit Google
     driver.get("http://e.mail.ru/cgi-bin/signup");
-    editForm(driver, "Имя", "Фамилия", "1", "январь", "1970", "master.of.puppets");
+    editForm(driver, "Имя", "Фамилия", "1", "январь", "1970", args[0]);
 
     // Alternatively the same thing can be done like this
     // driver.navigate().to("http://www.google.com");
@@ -85,7 +86,7 @@ public class registration {
     inputGender.click();
     inputEmail.sendKeys(email);
     try {
-      Thread.sleep(10000); //TODO worst method sad but true
+      Thread.sleep(10); //TODO worst method sad but true
 
     } catch (InterruptedException e) {
       e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -93,21 +94,10 @@ public class registration {
     TextFound(driver, "Ящик с таким именем уже существует");
   }
   public static void TextFound (WebDriver driver, String text ) {
-     WebElement myDynamicElement = (new WebDriverWait(driver, 10))
-  .until(new ExpectedCondition<WebElement>(){
-	@Override
-	public WebElement apply(WebDriver d) {
-		return d.findElement(By.id("myDynamicElement"));
-	}});
     if (driver.findElement(By.xpath("//html/body")).getText().contains(text)) {
-    System.out.println("email already registered");
+      System.out.println("email already registered");
     } else {
-    System.out.println("fuckup");
+      System.out.println("fuckup");
     }
-    ;
-
-
   }
-
-
 }
