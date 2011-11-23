@@ -31,7 +31,7 @@ public class registration {
 
         //editFormMailru(driver, "Имя", "Фамилия", "1", "январь", "1970", args[1], "qwerty12", "Номер паспорта", "123456");
 
-        editFormTutBy(driver,args[1],"qwerty12", "Номер паспорта", "123456", "Имя","Фамилия");
+        editFormTutBy(driver,args[1],"qwerty12", "Номер паспорта", "123456", "Имя","Фамилия", "1" , "января", "1970" );
 
 
     // Alternatively the same thing can be done like this
@@ -64,7 +64,7 @@ public class registration {
     // Close the browser
     // driver.quit();
   }
-  public static void editFormTutBy (WebDriver driver, String login, String password, String question, String answer, String firstname, String lastname) {
+  public static void editFormTutBy (WebDriver driver, String login, String password, String question, String answer, String firstname, String secondname, String day, String month, String year) {
     driver.get("http://profile.tut.by/");
 
     By submitXpath = By.xpath("//html/body/table[2]/tbody/tr[2]/td[2]/div/form/p/input[2]");
@@ -75,24 +75,30 @@ public class registration {
     By questionId = By.id("Question");
     By answerId = By.id("Answer");
     By firstNameId = By.id("FirstName");
-    By secondtNameId = By.id("LastName");
+    By secondtNameId = By.id("SecondName");
+    By dayId = By.id("_3_1");
+    By monthId = By.id("_3_2");
+    By yearId = By.id("_3_3");
+    By ap_wordId = By.id("ap_word");
+
+      try {
+      Thread.sleep(5000); //TODO worst method sad but true
+      if (TextFound(driver, "Идентификатор пользователя занят")) {
+        System.out.println("Email already registered, try another one");
+        //driver.quit();
+      }
+
+    } catch (InterruptedException e) {
+      e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+    }
 
 
     WebElement buttonSubmit = driver.findElement(submitXpath);
 
     buttonSubmit.click();
 
-    WebElement inputLogin = driver.findElement(loginId);
-    WebElement buttonCheckFree = driver.findElement(checkFreeUserId);
-    WebElement inputPassword1 = driver.findElement(password1Id);
-    WebElement inputPassword2 = driver.findElement(password2Id);
-    WebElement inputQuestion = driver.findElement(questionId);
-    WebElement inputAnswer = driver.findElement(answerId);
-    WebElement inputFirstName = driver.findElement(firstNameId);
-    WebElement inputLastName = driver.findElement(secondtNameId);
-
-    inputLogin.sendKeys(login);
-    buttonCheckFree.click();
+    driver.findElement(loginId).sendKeys(login);
+    driver.findElement(checkFreeUserId).click();
     try {
       Thread.sleep(5000); //TODO worst method sad but true
       if (TextFound(driver, "Идентификатор пользователя занят")) {
@@ -103,14 +109,39 @@ public class registration {
     } catch (InterruptedException e) {
       e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
     }
+    driver.findElement(password1Id).sendKeys(password);
+    driver.findElement(password2Id).sendKeys(password);
+    driver.findElement(questionId).sendKeys(question);
+    driver.findElement(answerId).sendKeys(answer);
+    driver.findElement(firstNameId).sendKeys(firstname);
+    driver.findElement(secondtNameId).sendKeys(secondname);
+    driver.findElement(dayId).sendKeys(day);
+    driver.findElement(monthId).sendKeys(month);
+    driver.findElement(yearId).sendKeys(year);
+    driver.findElement(ap_wordId).click();
+
+
+
+    //inputLogin.sendKeys(login);
+    //buttonCheckFree.click();
+    /*
     inputPassword1.sendKeys(password);
     inputPassword2.sendKeys(password);
     inputQuestion.sendKeys(question);
     inputAnswer.sendKeys(answer);
     inputFirstName.sendKeys(firstname);
-    inputLastName.sendKeys(lastname);
+    inputSecondName.sendKeys(secondname);
+    inputDay.sendKeys(day);
+    inputMonth.sendKeys(month);
+    inputYear.sendKeys(year);
+    try {
+      driver.wait();
+    } catch (InterruptedException e) {
+      e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+    }
+     */
 
-  }
+       }
   public static void editFormMailru(WebDriver driver, String name, String surname, String day, String month, String year, String email, String password, String question, String answer) {
     driver.get("http://e.mail.ru/cgi-bin/signup");
 
