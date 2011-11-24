@@ -20,21 +20,22 @@ import sun.font.TrueTypeFont;
 
 public class registration {
   public static void main(String[] args) {
-    System.out.print(args[1]);
-    // Create a new instance of the Firefox driver
-    // Notice that the remainder of the code relies on the interface,
-    // not the implementation.
     WebDriver driver = new FirefoxDriver();
-
-    // And now use this to visit Google
-
-
-        //editFormMailru(driver, "Имя", "Фамилия", "1", "январь", "1970", args[1], "qwerty12", "Номер паспорта", "123456");
-
-        editFormTutBy(driver,args[1],"qwerty12", "Номер паспорта", "123456", "Имя","Фамилия", "1" , "января", "1970" );
-
-
-    // Alternatively the same thing can be done like this
+    String domain = args[0];
+    //System.out.print(args[1]);
+    if (domain.equals("-t")) {
+      editFormTutBy(driver,args[1],"qwerty12", "Номер паспорта", "123456", "Имя","Фамилия", "1" , "января", "1970" );
+    } else if (domain.equals("-m")) {
+      editFormMailru(driver, "Имя", "Фамилия", "1", "январь", "1970", args[1], "qwerty12", "Номер паспорта", "123456");
+    } else if (domain.equals("-a")) {
+      editFormMailinator ();      
+    } else {
+      System.out.println("add help message");
+      driver.close();
+      driver.close();
+    }
+    
+// Alternatively the same thing can be done like this
     // driver.navigate().to("http://www.google.com");
 
     // Find the text input element by its name
@@ -64,6 +65,10 @@ public class registration {
     // Close the browser
     // driver.quit();
   }
+
+  private static void editFormMailinator() {
+  }
+
   public static void editFormTutBy (WebDriver driver, String login, String password, String question, String answer, String firstname, String secondname, String day, String month, String year) {
     driver.get("http://profile.tut.by/");
 
@@ -81,22 +86,7 @@ public class registration {
     By yearId = By.id("_3_3");
     By ap_wordId = By.id("ap_word");
 
-      try {
-      Thread.sleep(5000); //TODO worst method sad but true
-      if (TextFound(driver, "Идентификатор пользователя занят")) {
-        System.out.println("Email already registered, try another one");
-        //driver.quit();
-      }
-
-    } catch (InterruptedException e) {
-      e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-    }
-
-
-    WebElement buttonSubmit = driver.findElement(submitXpath);
-
-    buttonSubmit.click();
-
+    driver.findElement(submitXpath).click();
     driver.findElement(loginId).sendKeys(login);
     driver.findElement(checkFreeUserId).click();
     try {
@@ -120,27 +110,6 @@ public class registration {
     driver.findElement(yearId).sendKeys(year);
     driver.findElement(ap_wordId).click();
 
-
-
-    //inputLogin.sendKeys(login);
-    //buttonCheckFree.click();
-    /*
-    inputPassword1.sendKeys(password);
-    inputPassword2.sendKeys(password);
-    inputQuestion.sendKeys(question);
-    inputAnswer.sendKeys(answer);
-    inputFirstName.sendKeys(firstname);
-    inputSecondName.sendKeys(secondname);
-    inputDay.sendKeys(day);
-    inputMonth.sendKeys(month);
-    inputYear.sendKeys(year);
-    try {
-      driver.wait();
-    } catch (InterruptedException e) {
-      e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-    }
-     */
-
        }
   public static void editFormMailru(WebDriver driver, String name, String surname, String day, String month, String year, String email, String password, String question, String answer) {
     driver.get("http://e.mail.ru/cgi-bin/signup");
@@ -159,27 +128,13 @@ public class registration {
     By answerXpath = By.xpath("//form/div[12]/div[4]/span[2]/input");
     By submitXpath = By.xpath("//form/div[14]/span[2]/div/span/span/span/input");
 
-    WebElement inputName = driver.findElement(nameXpath);
-    WebElement inputSurname = driver.findElement(surnameXpath);
-    WebElement inputDay = driver.findElement(dayXpath);
-    WebElement inputMonth = driver.findElement(monthXpath);
-    WebElement inputYear = driver.findElement(yearXpath);
-    WebElement inputGender = driver.findElement(genderXpath);
-    WebElement inputEmail = driver.findElement(emailXpath);
-    WebElement inputPassword = driver.findElement(passwordXpath);
-    WebElement inputRepeatPassword = driver.findElement(passwordRepeatXpath);
-    WebElement linkNoMobile = driver.findElement(noMobileLinkXpath);
-    WebElement inputQuestion = driver.findElement(questionXpath);
-    WebElement inputAnswer = driver.findElement(answerXpath);
-    WebElement buttonSubmit = driver.findElement(submitXpath);
-
-    inputName.sendKeys(name);
-    inputSurname.sendKeys(surname);
-    inputDay.sendKeys(day);
-    inputMonth.sendKeys(month);
-    inputYear.sendKeys(year);
-    inputGender.click();
-    inputEmail.sendKeys(email);
+    driver.findElement(nameXpath).sendKeys(name);
+    driver.findElement(surnameXpath).sendKeys(surname);
+    driver.findElement(dayXpath).sendKeys(day);
+    driver.findElement(monthXpath).sendKeys(month);
+    driver.findElement(yearXpath).sendKeys(year);
+    driver.findElement(genderXpath).click();
+    driver.findElement(emailXpath).sendKeys(email);
     try {
       Thread.sleep(5000); //TODO worst method sad but true
       if (TextFound(driver, "Ящик с таким именем уже существует")) {
@@ -190,12 +145,12 @@ public class registration {
     } catch (InterruptedException e) {
       e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
     }
-    inputPassword.sendKeys(password);
-    inputRepeatPassword.sendKeys(password);
-    linkNoMobile.click();
-    inputQuestion.sendKeys(question);
-    inputAnswer.sendKeys(answer);
-    buttonSubmit.click();
+    driver.findElement(passwordXpath).sendKeys(password);
+    driver.findElement(passwordRepeatXpath).sendKeys(password);
+    driver.findElement(noMobileLinkXpath).click();
+    driver.findElement(questionXpath).sendKeys(question);
+    driver.findElement(answerXpath).sendKeys(answer);
+    driver.findElement(submitXpath).click();
 
 
   }
