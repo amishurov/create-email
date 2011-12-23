@@ -72,7 +72,7 @@ public class registration {
   public static void editFormTutBy (WebDriver driver, String login, String password, String question, String answer, String firstname, String secondname, String day, String month, String year) {
     driver.get("http://profile.tut.by/");
 
-    By submitXpath = By.xpath("//html/body/table[2]/tbody/tr[2]/td[2]/div/form/p/input[2]");
+    By submitXpath = By.xpath("//input[@value='Я согласен с правилами']");
     By loginId = By.id("Username");
     By checkFreeUserId = By.id("checkFreeUserBtn");
     By password1Id = By.id("Password1");
