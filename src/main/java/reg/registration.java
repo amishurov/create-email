@@ -24,52 +24,22 @@ public class registration {
     String domain = args[0];
     //System.out.print(args[1]);
     if (domain.equals("-t")) {
-      editFormTutBy(driver,args[1],"qwerty12", "Номер паспорта", "123456", "Имя","Фамилия", "1" , "января", "1970" );
+      editFormTutBy(driver,args[1],"12345678", "Номер паспорта", "123456", "Алексей","Петров", "1" , "января", "1970", "Мужчина" );
     } else if (domain.equals("-m")) {
       editFormMailru(driver, "Имя", "Фамилия", "1", "январь", "1970", args[1], "qwerty12", "Номер паспорта", "123456");
     } else if (domain.equals("-a")) {
-      editFormMailinator ();      
+      //editFormMailinator ();
     } else {
       System.out.println("add help message");
       driver.close();
-      driver.close();
     }
-    
-// Alternatively the same thing can be done like this
-    // driver.navigate().to("http://www.google.com");
-
-    // Find the text input element by its name
-    // WebElement element = driver.findElement(By.name("q"));
-
-    // Enter something to search for
-    // element.sendKeys("Cheese!");
-
-    // Now submit the form. WebDriver will find the form for us
-    // from the element
-    // element.submit();
-
-    // Check the title of the page
-    // System.out.println("Page title is: " + driver.getTitle());
-
-    // Google's search is rendered dynamically with JavaScript.
-    // Wait for the page to load, timeout after 10 seconds
-    /*(new WebDriverWait(driver, 10)).until(new
-    ExpectedCondition<Boolean>() {
-        public Boolean apply(WebDriver d) {
-            return d.getTitle().toLowerCase().startsWith("cheese!");
-        }
-    });
-     */
-    // Should see: "cheese! - Google Search"
-
-    // Close the browser
-    // driver.quit();
   }
 
-  private static void editFormMailinator() {
+  public static void editFormMailinator(WebDriver driver) {
+    driver.get("http://mailinator.com/");
   }
 
-  public static void editFormTutBy (WebDriver driver, String login, String password, String question, String answer, String firstname, String secondname, String day, String month, String year) {
+  public static void editFormTutBy (WebDriver driver, String login, String password, String question, String answer, String firstname, String secondname, String day, String month, String year, String gender) {
     driver.get("http://profile.tut.by/");
 
     By submitXpath = By.xpath("//input[@value='Я согласен с правилами']");
@@ -84,6 +54,7 @@ public class registration {
     By dayId = By.id("_3_1");
     By monthId = By.id("_3_2");
     By yearId = By.id("_3_3");
+    By genderId = By.id("_4");
     By ap_wordId = By.id("ap_word");
 
     driver.findElement(submitXpath).click();
@@ -108,6 +79,7 @@ public class registration {
     driver.findElement(dayId).sendKeys(day);
     driver.findElement(monthId).sendKeys(month);
     driver.findElement(yearId).sendKeys(year);
+    driver.findElement(genderId).sendKeys(gender);
     driver.findElement(ap_wordId).click();
 
        }
